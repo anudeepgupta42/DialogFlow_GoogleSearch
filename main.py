@@ -2,7 +2,7 @@
 import json
 from flask import Flask, request, make_response, jsonify
 from googleapiclient.discovery import build
-
+from config import (CSE_API_KEY, CSE_ID)
 # initialize the flask app
 app = Flask(__name__)
 log = app.logger
@@ -14,8 +14,8 @@ def google_search(search_term, api_key, cse_id, **kwargs):
     return res['items']
 
 def googleSearch(req):
-    my_api_key = "AIzaSyChK4th5t6gRIkPnlOcIqwrRjCb5PneEBs"
-    my_cse_id = "018139567253584497809:zpikuym7uf4"
+    my_api_key = CSE_API_KEY
+    my_cse_id = CSE_ID
     
     parameters = req['queryResult']['parameters']
     
