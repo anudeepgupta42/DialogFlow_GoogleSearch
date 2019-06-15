@@ -32,25 +32,22 @@ def googleSearch(req):
     
     try:
         results = google_search(search_term, my_api_key, my_cse_id, num=5)
-    # return an error if there is an error getting the forecast
+    # return an error if there is an error getting the google search result
     except (ValueError, IOError) as error:
         return error
+
     
         
     res = "Here are the top 5 searches: "
     for result in results:
         res = res + " \n "+result['link']
     
-    response ={'fulfillmentText': res}
-    print(response)
+   
+    print(res)
     
-    # build a request object
-#    req = request.get_json(force=True)
-# fetch action from json
-#    action = req.get('queryResult').get('action')
-# return a fulfillment response
-    return response
-# create a route for webhook
+
+    return res
+
 
 
 # create a route for webhook
