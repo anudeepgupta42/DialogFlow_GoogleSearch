@@ -27,11 +27,68 @@ def googleSearch(req):
     except (ValueError, IOError) as error:
         return error
        
-    res = "Here are the top 5 searches: "
+    res = []
     for result in results:
-        res = res + " \n "+result['link']
+        res.append(result['link'])
     
-    return res
+    response_json = {
+      "fulfillmentMessages": [
+          {
+            "platform": "ACTIONS_ON_GOOGLE",
+            "simpleResponses": {
+              "simpleResponses": [
+                { "textToSpeech": "Below are your top five search results "}
+              ]
+            }
+          },
+          {
+            "platform": "ACTIONS_ON_GOOGLE",
+            "linkOutSuggestion": {
+              "destinationName": "Search result 1",
+              "uri": res[0]
+            }
+          },
+    	  {
+            "platform": "ACTIONS_ON_GOOGLE",
+            "linkOutSuggestion": {
+              "destinationName": "Search result 2",
+              "uri": res[1]
+            }
+          },
+        {
+            "platform": "ACTIONS_ON_GOOGLE",
+            "linkOutSuggestion": {
+              "destinationName": "Search result 3",
+              "uri": res[2]
+            }
+          },
+    	  {
+            "platform": "ACTIONS_ON_GOOGLE",
+            "linkOutSuggestion": {
+              "destinationName": "Search result 4",
+              "uri": res[3]
+            }
+          },
+         {
+            "platform": "ACTIONS_ON_GOOGLE",
+            "linkOutSuggestion": {
+              "destinationName": "Search result 5",
+              "uri": res[4]
+            }
+          },
+          {
+            "text": {
+              "text": [
+                "Below are your top five search results:" +"\n"+res[0] +"\n"+res[1] +"\n"+res[2] +"\n"+res[3] +"\n"+res[4]
+              ]
+            }
+          }
+        ]
+    }
+    print(response_json)
+    print("\n")
+    print(res)        
+    return response_json
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -43,15 +100,14 @@ def webhook():
         return 'json error'
 
     if action == 'googlesearch':
-        res = googleSearch(req)
+        response_json = googleSearch(req)
     else:
         log.error('Unexpected action.')
 
     print('Action: ' + action)
-    print('Response: ' + res)
 
-    return make_response(jsonify({'fulfillmentText': res}))
+    return make_response(jsonify(response_json))
 
 # run the app
 if __name__ == '__main__':
-   app.run()
+    app.run(host='0.0.0.0', port=8080)
