@@ -1,0 +1,50 @@
+{
+  "fulfillmentMessages": [
+      {
+        "platform": "ACTIONS_ON_GOOGLE",
+        "simpleResponses": {
+          "simpleResponses": [
+            {
+              "textToSpeech": "click the below button to know your search result "
+            }
+          ]
+        }
+      },
+      {
+        "platform": "ACTIONS_ON_GOOGLE",
+        "linkOutSuggestion": {
+          "destinationName": "link1",
+          "uri": "https://www.infosys.com"
+        }
+      },
+	  {
+        "platform": "ACTIONS_ON_GOOGLE",
+        "linkOutSuggestion": {
+          "destinationName": "link2",
+          "uri": "https://www2.deloitte.com/in/en.html"
+        }
+      },
+            {
+        "platform": "ACTIONS_ON_GOOGLE",
+        "linkOutSuggestion": {
+          "destinationName": "link3",
+          "uri": "https://www.infosys.com"
+        }
+      },
+	  {
+        "platform": "ACTIONS_ON_GOOGLE",
+        "linkOutSuggestion": {
+          "destinationName": "link4",
+          "uri": "https://www2.deloitte.com/in/en.html"
+        }
+      },
+      {
+        "text": {
+          "text": [
+            "Text Response from Webhook"
+          ]
+        }
+      }
+    ]
+
+}
