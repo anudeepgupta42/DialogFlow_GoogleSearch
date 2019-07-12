@@ -32,59 +32,63 @@ def googleSearch(req):
         res.append(result['link'])
     
     response_json = {
-      "fulfillmentMessages": [
-          {
-            "platform": "ACTIONS_ON_GOOGLE",
-            "simpleResponses": {
-              "simpleResponses": [
-                { "textToSpeech": "Below are your top five search results "}
-              ]
+    "fulfillmentText": "This is a text response",
+    "fulfillmentMessages": [],
+    "source": "example.com",
+    "payload": {
+        "google": {
+            "expectUserResponse": True,
+            "richResponse": {
+                "items": [
+                    {
+                        "simpleResponse": {
+                            "textToSpeech": "Please find below your top 5 searches:"
+                        }
+                    },
+					{
+					  "carouselBrowse": {
+						"items": [
+						  {
+							"title": res[0][8:20] + '...',
+							"openUrlAction": {
+							  "url": res[0]
+							}
+						  },
+						  {
+							"title": res[1][8:20] + '...',
+							"openUrlAction": {
+							  "url": res[1]
+							}
+						  },
+                    				{
+							"title": res[2][8:20] + '...',
+							"openUrlAction": {
+							  "url": res[2]
+							}
+						  },
+						  {
+							"title": res[3][8:20] + '...',
+							"openUrlAction": {
+							  "url": res[3]
+							}
+						  },
+                    						  {
+							"title": res[4][8:20] + '...',
+							"openUrlAction": {
+							  "url": res[4]
+							}
+						  }
+						]
+					  }
+					}
+                ]
             }
-          },
-          {
-            "platform": "ACTIONS_ON_GOOGLE",
-            "linkOutSuggestion": {
-              "destinationName": "Search result 1",
-              "uri": res[0]
-            }
-          },
-    	  {
-            "platform": "ACTIONS_ON_GOOGLE",
-            "linkOutSuggestion": {
-              "destinationName": "Search result 2",
-              "uri": res[1]
-            }
-          },
-        {
-            "platform": "ACTIONS_ON_GOOGLE",
-            "linkOutSuggestion": {
-              "destinationName": "Search result 3",
-              "uri": res[2]
-            }
-          },
-    	  {
-            "platform": "ACTIONS_ON_GOOGLE",
-            "linkOutSuggestion": {
-              "destinationName": "Search result 4",
-              "uri": res[3]
-            }
-          },
-         {
-            "platform": "ACTIONS_ON_GOOGLE",
-            "linkOutSuggestion": {
-              "destinationName": "Search result 5",
-              "uri": res[4]
-            }
-          },
-          {
-            "text": {
-              "text": [
-                "Below are your top five search results:" +"\n"+res[0] +"\n"+res[1] +"\n"+res[2] +"\n"+res[3] +"\n"+res[4]
-              ]
-            }
-          }
-        ]
-    }
+        }
+    },
+    "outputContexts": [],
+    "followupEventInput": {}
+}
+
     print(response_json)
     print("\n")
     print(res)        
